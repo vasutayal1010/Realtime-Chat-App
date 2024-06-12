@@ -1,11 +1,27 @@
 import React from 'react'
 import LoginDialog from './account/LoginDialog'
-function Messenger() {
+import {AppBar,Toolbar,Box, styled} from '@mui/material'
+
+const Component = styled(Box)`
+    height : 100vh;
+    background : #DCDCDC;
+`
+const Header = styled(AppBar)`
+    height : 200px;
+    background-color : #00bfa5;
+`
+const Messenger = () => {
   return (
-    <div>
+    <Component>
+        <Header>
+            <Toolbar>
+
+            </Toolbar>
+        </Header>
+        
         <LoginDialog/>
-    </div>
+    </Component>
   )
 }
 
-export default Messenger
+export default Messenger;
