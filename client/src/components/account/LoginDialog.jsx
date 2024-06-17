@@ -1,8 +1,9 @@
 import { Box, Dialog, List, ListItem, Typography, styled } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
 import { qrCodeImage } from '../../constants/Data'
 import {GoogleLogin} from '@react-oauth/google'
-
+import {jwtDecode} from 'jwt-decode'
+import { AccountContext } from "../../context/AccountProvider";
 
 const Component = styled(Box)`
     display : flex
@@ -45,13 +46,21 @@ const dialogStyle = {
 
 
 const LoginDialog = () => {
-    const onLoginSuccess = () => {};
-    const onLoginError = () => {};
+  const {setAccount} = useContext(AccountContext)
+
+    const onLoginSuccess = (res) => {
+        const decode = jwtDecode(res.credential);
+        setAccount(decode);
+
+    };
+    const onLoginError = (res) => {
+        console.log(res)
+    };
 
 
 
   return (
-    <Dialog open={true} PaperProps={{ sx: dialogStyle }}>
+    <Dialog open={true} PaperProps={{ sx: dialogStyle }} hideBackdrop={true}>
       <Component>
         <Container>
           <Title>To use Whatsapp on your Computer</Title>
